@@ -3,6 +3,8 @@ import React, { useEffect } from 'react';
 import { auth } from '../_actions/user_actions';
 import { useSelector, useDispatch } from "react-redux";
 
+// for `option`, pass in `false` if user does not need to be signed in to 
+// view the page; otherwise, `true`
 export default function (SpecificComponent, option, adminRoute = null) {
     function AuthenticationCheck(props) {
 
