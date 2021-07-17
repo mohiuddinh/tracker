@@ -68,4 +68,45 @@ router.get("/logout", auth, (req, res) => {
     });
 });
 
+// fix this: first query for the favorited game and save that as a array, 
+// then add the new game in
+router.post("/addToFavorite", auth, (req, res) => {
+    newFavorites = []
+    User.find({ _id: req.body._id })
+    .exec((err, res) => {
+        if (err) res.status(400).json({ success: false, err });
+        newFavorites = res.favorites
+    })
+    
+    newFavorites.push(req.body.gameTitle); 
+
+    User.findOneAndUpdate({ _id: req.body._id }, 
+        { $set: { favorites: newFavorites} })
+    .exec((err, res) => {
+            if (err) res.status(400).json({ success: false, err });
+            res.status(200).json({ success: true, data: result });
+    })
+});
+
+router.post("/removeFromFavorite", auth, (req, res) => {
+    newFavorites = [];
+    User.find({ _id: req.body._id }).exec((err, res) => {
+        if (err) res.status(400).json({ success: false, err });
+        newFavorites = res.favorites;
+    });
+
+    const index = newFavorites.indexOf(req.body.gameTitle); 
+    if (index > -1) {
+        newFavorites.splice(index, 1); 
+    }
+
+    User.findOneAndUpdate(
+        { _id: req.body._id },
+        { $set: { favorites: newFavorites } }
+    ).exec((err, res) => {
+        if (err) res.status(400).json({ success: false, err });
+        res.status(200).json({ success: true, data: result });
+    });
+});
+
 module.exports = router;
