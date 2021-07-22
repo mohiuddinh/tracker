@@ -1,0 +1,25 @@
+@import '~antd/dist/antd.css';
+
+.GameTile {
+    overflow: hidden;
+    margin: 100px;
+    padding: 10px 15px;
+    width: 300px;
+    length: 25%;
+    color: purple;
+    border: inset;
+    border-radius: 40px;
+    background-color: mintcream;
+}
+
+.StatTile {
+    float: left;
+}
+
+.Stat {
+    float: right;
+}
+.Row {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

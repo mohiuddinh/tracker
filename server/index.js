@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const cors = require('cors')
+const https = require("https");
 
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
@@ -15,6 +16,7 @@ const config = require("./config/key");
 //   .catch(err => console.error(err));
 
 const mongoose = require("mongoose");
+const { response } = require("express");
 const connect = mongoose.connect(config.mongoURI,
   {
     useNewUrlParser: true, useUnifiedTopology: true,
@@ -22,6 +24,22 @@ const connect = mongoose.connect(config.mongoURI,
   })
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
+
+
+  // Tested fortnite API to see stats in console log
+  // const FortniteAPI = require("fortnite-api-com");
+
+  
+  // var Fortnite = new FortniteAPI(config);
+  
+  // Fortnite.BRStats({name: "Kombatkid13", image: "gamepad"})
+  // .then(res => {
+  //   console.log(res.data.account);
+  // }).catch(err => {
+  //   console.log(err);
+  // });
+  
+
 
 app.use(cors())
 
