@@ -3,11 +3,19 @@ const app = express();
 const path = require("path");
 const cors = require('cors')
 const https = require("https");
+const request = require("request");
+const dotenv = require("dotenv");
+const axios = require("axios").default;
+const lib = require('lib')({token: null /* link an account to create an identity */});
+const API = require('call-of-duty-api')();
 
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
 const config = require("./config/key");
+
+dotenv.config({ path: ".config.env"});
+
 
 // const mongoose = require("mongoose");
 // mongoose
@@ -17,6 +25,7 @@ const config = require("./config/key");
 
 const mongoose = require("mongoose");
 const { response } = require("express");
+const router = require("./routes/users");
 const connect = mongoose.connect(config.mongoURI,
   {
     useNewUrlParser: true, useUnifiedTopology: true,
@@ -25,6 +34,7 @@ const connect = mongoose.connect(config.mongoURI,
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
 
+  // ALL API'S ARE BENEATH HERE
 
   // Tested fortnite API to see stats in console log
   // const FortniteAPI = require("fortnite-api-com");
@@ -34,14 +44,83 @@ const connect = mongoose.connect(config.mongoURI,
   
   // Fortnite.BRStats({name: "Kombatkid13", image: "gamepad"})
   // .then(res => {
-  //   console.log(res.data.account);
+  //   console.log(res.data.stats);
   // }).catch(err => {
   //   console.log(err);
+  // })
+
+  // app.use("/api/v2/profile", require("./routes/users"));
+
+  // var apexOptions = {
+  //   method: 'GET',
+  //   url: 'https://apex-legends.p.rapidapi.com/stats/Kombatkid13/X1',
+  //   headers: {
+  //     'x-rapidapi-key': '1e88b9c971msh9358dd961449b60p1c4a67jsn82308f43c5f9',
+  //     'x-rapidapi-host': 'apex-legends.p.rapidapi.com'
+  //   }
+  // };
+  
+  // axios.request(apexOptions).then(function (response) {
+  //   console.log(response.data);
+  // }).catch(function (error) {
+  //   console.error(error);
+  // });
+
+
+
+// var storeOptions = {
+//   method: 'GET',
+//   url: 'https://game-prices.p.rapidapi.com/game/minecraft',
+//   params: {region: 'us', type: 'game'},
+//   headers: {
+//     'x-rapidapi-key': '1e88b9c971msh9358dd961449b60p1c4a67jsn82308f43c5f9',
+//     'x-rapidapi-host': 'game-prices.p.rapidapi.com'
+//   }
+// };
+
+// axios.request(storeOptions).then(function (response) {
+// 	console.log(response.data);
+// }).catch(function (error) {
+// 	console.error(error);
+// });
+
+//HALO MCC API
+
+// var halo = (async () => {
+//   // Using Node.js 12.x +
+// // use "lib" package from npm
+
+// // make API request
+// let result = await lib.halo.mcc['@0.1.0'].stats({
+//   gamertag: "Kombatkid13" // required
+// });
+// console.log(result);
+// })();
+
+
+
+
+
+  //TRACKER.GG API IS NOT AS GOOD
+  // var options = {
+  //   method: 'GET',
+  //   url: 'https://public-api.tracker.gg/v2/apex/standard/profile/xbl/Kombatkid13',
+  //   headers: {
+  //     "TRN-Api-Key": "5c5a685f-65cb-48cc-aeed-bb496c307f92",
+  //     'TRN-host': 'public-api.tracker.gg',
+  //   }
+  // };
+  
+  // axios.request(options).then(function (response) {
+  //   console.log(response.data);
+  // }).catch(function (error) {
+  //   console.error(error);
   // });
   
 
+//END API'S 
+// REMEMBER TO CREDIT SOURCES
 
-app.use(cors())
 
 //to not get any deprecation warning or error
 //support parsing of application/x-www-form-urlencoded post data

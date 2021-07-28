@@ -1,30 +1,22 @@
 import React, { useState } from "react";
 import './GameTile.css';
+const axios = require("axios").default;
 
 
-function GameTile() {
+function GameTile(props) {
+
+
     return (
         <div className="GameTile">
             <h1>Game Title</h1>
             <br></br>
             <div className="StatTile Row">
-                <p >Game Stat Name</p>
+                <p >Current Legend</p>
             </div>
             <div className="Stat Row">
-                <p>Game Stat</p>
+                <p>{props.a}</p>
             </div>
-            <div className="StatTile Row">
-                <p >Game Stat Name</p>
-            </div>
-            <div className="Stat Row">
-                <p>Game Stat</p>
-            </div>
-            <div className="StatTile Row">
-                <p >Game Stat Name</p>
-            </div>
-            <div className="Stat Row">
-                <p>Game Stat</p>
-            </div>
+            
             
             
         </div>
