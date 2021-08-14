@@ -6,8 +6,8 @@ const https = require("https");
 const request = require("request");
 const dotenv = require("dotenv");
 const axios = require("axios").default;
-const lib = require('lib')({token: null /* link an account to create an identity */});
-const API = require('call-of-duty-api')();
+const battlegrounds = require('battlegrounds')
+
 
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
@@ -36,18 +36,26 @@ const connect = mongoose.connect(config.mongoURI,
 
   // ALL API'S ARE BENEATH HERE
 
+
   // Tested fortnite API to see stats in console log
-  // const FortniteAPI = require("fortnite-api-com");
+
+// const fconfig = {
+//   apikey: "72ebd6aaa1bbf3509b980f77f6a447c76a593081",
+//   language: "en",
+//   debug: true
+// };
+
+//   const FortniteAPI = require("fortnite-api-com");
 
   
-  // var Fortnite = new FortniteAPI(config);
+//   var Fortnite = new FortniteAPI(fconfig);
   
-  // Fortnite.BRStats({name: "Kombatkid13", image: "gamepad"})
-  // .then(res => {
-  //   console.log(res.data.stats);
-  // }).catch(err => {
-  //   console.log(err);
-  // })
+//   Fortnite.BRStats({name: "Kombatkid13", image: "gamepad"})
+//   .then(res => {
+//     console.log(res.data.stats);
+//   }).catch(err => {
+//     console.log(err);
+//   })
 
   // app.use("/api/v2/profile", require("./routes/users"));
 
@@ -55,13 +63,13 @@ const connect = mongoose.connect(config.mongoURI,
   //   method: 'GET',
   //   url: 'https://apex-legends.p.rapidapi.com/stats/Kombatkid13/X1',
   //   headers: {
-  //     'x-rapidapi-key': '1e88b9c971msh9358dd961449b60p1c4a67jsn82308f43c5f9',
+  //     'x-rapidapi-key': 'f4a936d572msh54c9a38579e5eedp1223c7jsnf3bf55cba7f7',
   //     'x-rapidapi-host': 'apex-legends.p.rapidapi.com'
   //   }
   // };
   
   // axios.request(apexOptions).then(function (response) {
-  //   console.log(response.data);
+  //   console.log(response.data.legends.all.Revenant);
   // }).catch(function (error) {
   //   console.error(error);
   // });
@@ -98,7 +106,30 @@ const connect = mongoose.connect(config.mongoURI,
 // })();
 
 
+// https://github.com/salikx/TheDivisionTab-API SOURCE
+// axios.request("https://thedivisiontab.com/api/search.php?name=baiier&platform=uplay").then(res => {
+//   console.log(res.data);
+// }).catch(err => {
+//   console.error(err);
+// })
 
+// SOURCE https://github.com/feed4rz/node-battlegrounds
+// var pubgAPIKEY = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJlMjI4MTk0MC1kMjBjLTAxMzktZDhmZi01YmZmN2VjMTVjNzUiLCJpc3MiOiJnYW1lbG9ja2VyIiwiaWF0IjoxNjI3NTAyNjQ0LCJwdWIiOiJibHVlaG9sZSIsInRpdGxlIjoicHViZyIsImFwcCI6Ii01NWIyYzViMC0yOWVlLTQxOTQtOWQ0Zi02N2I4NTVlOWQ2YjgifQ.qGeioPuGRNrou8OcCpC974z62TkBkzzQxUVP8jMat2E"
+
+// const pubgApi = new battlegrounds(pubgAPIKEY, 'pc-na')
+
+// async function findShroud() {
+//   try {
+//     const res = await pubgApi.getPlayer({ id: 'account.d50fdc18fcad49c691d38466bed6f8fd' })
+
+//     console.log('result:')
+//     console.log(res)
+//   } catch(err) {
+//   	console.log('error:')
+//     console.error(err)
+//   }
+// }
+// findShroud()
 
 
   //TRACKER.GG API IS NOT AS GOOD
@@ -116,6 +147,34 @@ const connect = mongoose.connect(config.mongoURI,
   // }).catch(function (error) {
   //   console.error(error);
   // });
+
+
+//   function pad2(n) { return n < 10 ? '0' + n : n }
+
+//   var date = new Date();
+      
+//   var timeStamp = ( date.getFullYear().toString() + pad2(date.getMonth() + 1) + pad2( date.getDate()) + pad2( date.getHours() + 4 ) + pad2( date.getMinutes() ) + pad2( date.getSeconds() ) );
+// console.log(timeStamp);
+// console.log('https://api.smitegame.com/smiteapi.svc/createsessionJson/4030/C5C296D9044B45FE8DB8F5BCF40DF5A9/' + timeStamp)
+
+// var options = {
+//     method: 'GET',
+//     url: 'https://api.smitegame.com/smiteapi.svc/createsessionJson/4030/C5C296D9044B45FE8DB8F5BCF40DF5A9/' + timeStamp,
+//     headers: {
+      
+//     }
+//   };
+  
+//   axios.request(options).then(function (response) {
+//     console.log(response.data);
+//   }).catch(function (error) {
+//     console.error(error);
+//   });
+
+
+
+
+
   
 
 //END API'S 
@@ -132,6 +191,8 @@ app.use(cookieParser());
 
 app.use('/api/users', require('./routes/users'));
 app.use('/api/apex', require('./routes/apex')); 
+app.use('/api/fortnite', require('./routes/fortnite'));
+app.use('/api/halomcc', require('./routes/halomcc'));
 
 //use this to show the image you have in node js server to client (react js)
 //https://stackoverflow.com/questions/48914987/send-image-path-from-node-js-express-server-to-react-client

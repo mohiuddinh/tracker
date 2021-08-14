@@ -10,7 +10,7 @@ router.get("/test", auth, (req, res) => {
     method: "GET",
     url: "https://apex-legends.p.rapidapi.com/stats/Kombatkid13/X1",
     headers: {
-      "x-rapidapi-key": "1e88b9c971msh9358dd961449b60p1c4a67jsn82308f43c5f9",
+      "x-rapidapi-key": "f4a936d572msh54c9a38579e5eedp1223c7jsnf3bf55cba7f7",
       "x-rapidapi-host": "apex-legends.p.rapidapi.com",
     },
   };
