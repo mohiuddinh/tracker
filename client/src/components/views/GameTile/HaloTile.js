@@ -2,7 +2,7 @@ import { urlencoded } from "body-parser";
 import React, { useState } from "react";
 import './GameTile.css';
 const axios = require("axios").default;
-const lib = require('lib')({token: null /* link an account to create an identity */});
+const lib = require('lib')({token: null /* link an account to create an identity */}); //REMOVE THIS LINE
 
 
 function HaloTile() {
