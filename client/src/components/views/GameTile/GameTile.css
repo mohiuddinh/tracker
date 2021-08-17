@@ -10,6 +10,22 @@
     width: 30%;
 }
 
+.left {
+    float: left;
+}
+
+.right {
+    float: right
+}
+
+/* .GameTile {
+    overflow: hidden;
+    margin: 25px;
+    padding: 10px 15px;
+    border: inset;
+    background-color: aquamarine;
+} */
+
 .Row {
     margin-top: 10px;
     margin-bottom: 10px;

@@ -3,25 +3,22 @@ const router = express.Router();
 const { auth } = require("../middleware/auth");
 var axios = require("axios");
 
-router.get("/test", auth, (req, res) => {
-    console.log("yeee h");
+router.post("/test", auth, (req, res) => {
+    console.log(req.body);
+    let thisURL = 
+    "https://halo.api.stdlib.com/mcc@0.1.0/stats/?gamertag=" +
+    req.body.gamertag;
 
+    let thisURL2 = 
+    "https://halo.api.stdlib.com/mcc@0.1.0/games/latest/?gamertag=" +
+    req.body.gamertag +
+    "&game=" +
+    req.body.game +
+    "&gameVariant=" +
+    req.body.gameVariant;
 
-    // var haloOptions = {
-    //   method: "GET",
-    //   url: "https://halo.api.stdlib.com/mcc@0.1.0/stats/?gamertag=Kombatkid13",
-    //   headers: {
-    //     "x-rapidapi-host": "https://halo.api.stdlib.com/mcc@0.1.0/stats/",
-    //   },
-    // };
-
-    // var haloLatestOptions = {
-    //   method: "GET",
-    //   url: "https://halo.api.stdlib.com/mcc@0.1.0/games/latest/?gamertag=Kombatkid13&game=Halo%202&gameVariant=CTF",
-    //   headers: {
-    //     "x-rapidapi-host": "https://halo.api.stdlib.com/mcc@0.1.0/stats/",
-    //   },
-    // };
+console.log(thisURL2)
+    // Halo%202
 
 
   let one =
@@ -30,8 +27,8 @@ router.get("/test", auth, (req, res) => {
   "https://halo.api.stdlib.com/mcc@0.1.0/games/latest/?gamertag=Kombatkid13&game=Halo%202&gameVariant=CTF";
 
 
-const requestOne = axios.get(one);
-const requestTwo = axios.get(two);
+const requestOne = axios.get(thisURL);
+const requestTwo = axios.get(thisURL2);
 
 axios
   .all([requestOne, requestTwo])
@@ -50,6 +47,23 @@ axios
     console.error(errors);
   });
 
+
+
+     // var haloOptions = {
+    //   method: "GET",
+    //   url: "https://halo.api.stdlib.com/mcc@0.1.0/stats/?gamertag=Kombatkid13",
+    //   headers: {
+    //     "x-rapidapi-host": "https://halo.api.stdlib.com/mcc@0.1.0/stats/",
+    //   },
+    // };
+
+    // var haloLatestOptions = {
+    //   method: "GET",
+    //   url: "https://halo.api.stdlib.com/mcc@0.1.0/games/latest/?gamertag=Kombatkid13&game=Halo%202&gameVariant=CTF",
+    //   headers: {
+    //     "x-rapidapi-host": "https://halo.api.stdlib.com/mcc@0.1.0/stats/",
+    //   },
+    // };
 
 // axios
 // .request(haloOptions, haloLatestOptions)

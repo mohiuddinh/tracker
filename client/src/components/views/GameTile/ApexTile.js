@@ -4,26 +4,46 @@ import "./GameTile.css";
 const axios = require("axios").default;
 
 function ApexTile() {
-  const [game, setGame] = useState({
-    username: "",
-    level: "",
-    battlepass: "",
-    rank: "",
-    rankDiv: "",
-    recentLegend: "",
-    chosenLegend: "",
-    arenaRank: "",
-    arenaRankDiv: "",
-    currentLegendIcon: "",
-    rankScore: "",
-    chosenLegend: "",
+  const [apex, setApex] = useState({});
+
+  var objectNames = {
+      1: "Username",
+      2: "Level",
+      3: "BattlePass Level",
+      4: "BR Rank",
+      5: "BR Rank Score",
+      6: "BR Rank Div",
+      7: "Recent Played Legend",
+      8: "Arena Rank",
+      9: "Arena Rank Div",
+      10: "Current Legend Icon",
+      
+  }
+
+  function handleChange(event) {
+      
+        let gamerTag = event.target.value;
+
+        setParams((prev) => {
+            return ({
+                ...prev,
+                gamertag: gamerTag,
+            }
+            )
+        })
+        
+  }
+
+  const [params, setParams] = useState({
+      gamertag: "",
+      console: "X1"
   });
 
   function callAPI() {
-    let variable = { gamertag: "Kombatkid13", console: "X1" };
+    let variable = params   //{ gamertag: "zurges", console: "X1" };
     axios.post("/api/apex/test", variable).then((res) => {
         console.log(res); 
-      setGame((prev) => {
+      setApex((prev) => {
         return {
           ...prev,
           username: res.data.data.global.name,
@@ -39,52 +59,85 @@ function ApexTile() {
         };
       });
     });
+    
+  }
+
+  function showResults(event) {
+
+
+    if(event === "Show"){
+      setTimeout(() => {
+        setShowContent({showContent: true});
+      }, 1500)
+      
+    }else{
+      setTimeout(() => {
+        setShowContent({showContent: false});
+      }, 250)
+    }
+  }
+
+  const [showContent, setShowContent] = useState({showContent: false})
+
+  function displayContent() {
+    if(showContent.showContent == false){
+      return(
+      <div>
+        <form>
+        <input
+        onChange={handleChange}
+        type="text"
+        placeholder="What's your name?"
+        value={params.gamerTag}
+      />
+        </form>
+        <button name="Show" onClick={() => {
+          callAPI();
+          showResults("Show");
+        }}>Search for Results</button>
+      </div>
+      )
+    }else{
+      return(
+      <div>
+        {Object.keys(apex).map((keyName, i) => (
+                <div className="Stats">
+                <h2 className="StatTile Row">{objectNames[i]}</h2>  
+                <p className="Stat Row">{apex[keyName]}</p>
+                </div>
+                ))}
+                <button name="Hide" onClick={() => {
+                  callAPI();
+                  showResults("Hide");
+                }}>Hide Results</button>
+      </div>
+      )
+    }
   }
 
   return (
     <div className="GameTile">
-      <h1>Apex Legends</h1>
+      <h1>Apex</h1>
+      {displayContent()}
+            {/* {Object.keys(apex).map((keyName, i) => (
+                <div className="Stats">
+                <h2 className="StatTile Row">{objectNames[i]}</h2>  
+                <p className="Stat Row">{apex[keyName]}</p>
+                </div>
+                ))} */}
 
-      <div className="Stats">
-        <h2 className="StatTile Row">Username</h2>
-        <p className="Stat Row">{game.username}</p>
-      </div>
-      <hr></hr>
-      <div className="Stats">
-        <h2 className="StatTile Row">Current Level</h2>
-        <p className="Stat Row">{game.level}</p>
-      </div>
-      <hr></hr>
-      <div className="Stats">
-        <h2 className="StatTile Row">Current Battlepass Level</h2>
-        <p className="Stat Row">{game.battlepass}</p>
-      </div>
-      <hr></hr>
-      <div className="Stats">
-        <h2 className="StatTile Row">Current BR Rank</h2>
-        <p className="Stat Row">
-          {game.rank} {game.rankDiv}
-        </p>
-      </div>
-      <hr></hr>
-      <div className="Stats">
-        <h2 className="StatTile Row">Current BR Rank Score</h2>
-        <p className="Stat Row">{game.rankScore}</p>
-      </div>
-      <hr></hr>
-      <div className="Stats">
-        <h2 className="StatTile Row">Most Recently Played Legend</h2>
-        <p className="Stat Row">{game.recentLegend}</p>
-      </div>
-      <hr></hr>
-      <div className="Stats">
-        <h2 className="StatTile Row">Current Arena Rank</h2>
-        <p className="Stat Row">
-          {game.arenaRank} {game.arenaRankDiv}
-        </p>
-      </div>
+      
 
-      <button onClick={callAPI}>Click Here</button>
+        {/* <form>
+        <input
+        onChange={handleChange}
+        type="text"
+        placeholder="What's your name?"
+        value={params.gamerTag}
+      />
+        </form>
+        <button onClick={callAPI}>Click Here</button> */}
+
     </div>
   );
 }

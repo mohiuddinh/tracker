@@ -141,9 +141,74 @@ function FortniteTile() {
     }
 
 
+    function showResults(event) {
+
+
+        if(event === "Show"){
+          setTimeout(() => {
+            setShowContent({showContent: true});
+          }, 1500)
+          
+        }else{
+          setTimeout(() => {
+            setShowContent({showContent: false});
+          }, 250)
+        }
+      }
+    
+      const [showContent, setShowContent] = useState({showContent: false})
+    
+      function displayContent() {
+        if(showContent.showContent == false){
+          return(
+          <div>
+            <button name="Show" onClick={() => {
+          callAPI();
+          showResults("Show");
+        }}>Search for Results</button>
+          </div>
+          )
+        }else{
+          return(
+          <div>
+            <div className="GameTile left">
+            <h1>Fortnite</h1>
+            {Object.keys(overall).map((keyName, i) => (
+                <div className="Stats">
+                <h2 className="StatTile Row">{objectNames[i]}</h2>  
+                <p className="Stat Row">{overall[keyName]}</p>
+                </div>
+                ))}
+                <button name="Show" onClick={() => {
+          callAPI();
+          showResults("Hide");
+        }}>Hide Results</button>
+                
+        </div>
+
+        <div className="GameTile right">
+            <h1>Fortnite</h1>
+            {Object.keys(solo).map((keyName, i) => (
+                <div className="Stats">
+                <h2 className="StatTile Row">{objectNames[i]}</h2>  
+                <p className="Stat Row">{solo[keyName]}</p>
+                </div>
+                ))}
+                <button name="Show" onClick={() => {
+          callAPI();
+          showResults("Hide");
+        }}>Hide Results</button>
+        </div>
+          </div>
+          )
+        }
+      }
+
+
     return (
         <div className="GameTile">
-        <div className="GameTile">
+            {displayContent()}
+        {/* <div className="GameTile left">
             <h1>Fortnite</h1>
             {Object.keys(overall).map((keyName, i) => (
                 <div className="Stats">
@@ -154,7 +219,7 @@ function FortniteTile() {
                 
         </div>
 
-        <div className="GameTile">
+        <div className="GameTile right">
             <h1>Fortnite</h1>
             {Object.keys(solo).map((keyName, i) => (
                 <div className="Stats">
@@ -163,11 +228,11 @@ function FortniteTile() {
                 </div>
                 ))}
                 
-        </div>
+        </div> */}
 
         
 
-        <button onClick={callAPI}>Click Here</button>
+        {/* <button onClick={callAPI}>Click Here</button> */}
 
         </div>
         
