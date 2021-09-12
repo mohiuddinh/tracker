@@ -2,21 +2,24 @@
 
 .GameTile {
     overflow: hidden;
-    margin: 25px;
+    margin: 70px;
     padding: 10px 15px;
     border: inset;
     border-radius: 40px;
-    background-color: rgb(102, 125, 175);
-    width: 30%;
+    background-color: rgb(30, 35, 44);
+    width: 40%;
+    float: left;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
 }
 
-.left {
+/* .left {
     float: left;
 }
 
 .right {
     float: right
-}
+} */
 
 /* .GameTile {
     overflow: hidden;
@@ -34,18 +37,33 @@
 p {
     font-size: 15px;
     text-align: right;
-    color: black;
+    color: violet;
+    display: inline-block;
+    float: right;
 }
 
 h1 {
     text-align: center;
     font-size: 60px;
+    color: #ca652f;
 }
 
 h2 {
     text-align: left;
-    font-size: 20px;
+    font-size: 25px;
+    color: violet;
+    display: inline-block
 }
+
+button {
+    transition-duration: 0.4s;
+    background-color: bisque;
+}
+button:hover {
+    background-color: #ca652f; /* Green */
+    color: white;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  }
 
 .legend_portrait {
 margin-left: 0px;

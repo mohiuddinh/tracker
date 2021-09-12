@@ -18,6 +18,7 @@ function FortniteTile() {
     const [squad, setSquad] = useState({});
 
     const objectNames = {
+      0: "Hello",
         1: "deaths",
         2: "kd",
         3: "kills",
@@ -171,7 +172,7 @@ function FortniteTile() {
         }else{
           return(
           <div>
-            <div className="GameTile left">
+           
             <h1>Fortnite</h1>
             {Object.keys(overall).map((keyName, i) => (
                 <div className="Stats">
@@ -183,22 +184,6 @@ function FortniteTile() {
           callAPI();
           showResults("Hide");
         }}>Hide Results</button>
-                
-        </div>
-
-        <div className="GameTile right">
-            <h1>Fortnite</h1>
-            {Object.keys(solo).map((keyName, i) => (
-                <div className="Stats">
-                <h2 className="StatTile Row">{objectNames[i]}</h2>  
-                <p className="Stat Row">{solo[keyName]}</p>
-                </div>
-                ))}
-                <button name="Show" onClick={() => {
-          callAPI();
-          showResults("Hide");
-        }}>Hide Results</button>
-        </div>
           </div>
           )
         }
