@@ -17,26 +17,16 @@ function FortniteTile() {
 
     const [squad, setSquad] = useState({});
 
-    const objectNames = {
-      0: "Hello",
-        1: "deaths",
-        2: "kd",
-        3: "kills",
-        4: "killsPerMatch",
-        5: "killsPerMin",
-        6: "matches",
-        7: "minutesPlayed",
-        8: "playersOutlived",
-        9: "score",
-        10: "scorePerMatch",
-        11: "winRate",
-        12: "wins",
-    }
+    const [params, setParams] = useState({
+      gamertag: "Kombatkid13",
+      gameType: "Solo",
+  })
 
 
     function callAPI() {
 
-    axios.get("/api/fortnite/test").then((res) => {
+      let variable = params;
+    axios.post("/api/fortnite/test", variable).then((res) => {
     
         var response = res.data.data;
 
@@ -53,24 +43,25 @@ function FortniteTile() {
         setOverall((prev) => {
             return ({
             ...prev,
-            deaths: overall.deaths,
-            kd: overall.kd,
-            kills: overall.kills,
-            killsPerMatch: overall.killsPerMatch,
-            killsPerMin: overall.killsPerMin,
-            matches: overall.matches,
-            minutesPlayed: overall.minutesPlayed,
-            playersOutlived: overall.playersOutlived,
-            score: overall.score,
-            scorePerMatch: overall.scorePerMatch,
+            "Kills": overall.kills,
+            "Deaths": overall.deaths,
+            "Kill Death Ratio": overall.kd,
+            "Kills Per Match": overall.killsPerMatch,
+            // killsPerMin: overall.killsPerMin,
+            "Matches Played": overall.matches,
+            "Minutes Played": overall.minutesPlayed,
+            "Players Outlived": overall.playersOutlived,
+            "Score": overall.score,
+            "Average Score Per Match": overall.scorePerMatch,
             // top3: overall.top3,
             // top5: overall.top5,
             // top6: overall.top6,
             // top10: overall.top10,
             // top12: overall.top12,
             // top25: overall.top25,
-            winRate: overall.winRate,
-            wins: overall.wins,
+            "Wins": overall.wins,
+            "Win Rate": overall.winRate,
+            
             })
         })
 
@@ -78,20 +69,23 @@ function FortniteTile() {
         setSolo((prev) => {
             return ({
             ...prev,
-            deaths: solo.deaths,
-            kd: solo.kd,
-            kills: solo.kills,
-            killsPerMatch: solo.killsPerMatch,
-            killsPerMin: solo.killsPerMin,
-            matches: solo.matches,
-            minutesPlayed: solo.minutesPlayed,
-            playersOutlived: solo.playersOutlived,
-            score: solo.score,
-            scorePerMatch: solo.scorePerMatch,
-            top10: solo.top10,
-            top25: solo.top25,
-            winRate: solo.winRate,
-            wins: solo.wins,
+            "Wins": solo.wins,
+            "Kills": solo.kills,
+            "Deaths": solo.deaths,
+            "Kill Death Ratio": solo.kd,
+            
+            "Kills Per Match": solo.killsPerMatch,
+            // killsPerMin: solo.killsPerMin,
+            "Matches Played": solo.matches,
+            "Minutes Played": solo.minutesPlayed,
+            "Players Outlived": solo.playersOutlived,
+            "Score": solo.score,
+            "Score Per Match": solo.scorePerMatch,
+            "Top 10:": solo.top10,
+            "Top 25": solo.top25,
+            
+            "Win Rate": solo.winRate,
+            
 
             })
         })
@@ -100,20 +94,22 @@ function FortniteTile() {
         setDuo((prev) => {
             return ({
             ...prev,
-            deaths: duo.deaths,
-            kd: duo.kd,
-            kills: duo.kills,
-            killsPerMatch: duo.killsPerMatch,
-            killsPerMin: duo.killsPerMin,
-            matches: duo.matches,
-            minutesPlayed: duo.minutesPlayed,
-            playersOutlived: duo.playersOutlived,
-            score: duo.score,
-            scorePerMatch: duo.scorePerMatch,
-            top5: duo.top5,
-            top12: duo.top12,
-            winRate: duo.winRate,
-            wins: duo.wins,
+            "Wins": duo.wins,
+            "Kills": duo.kills,
+            "Deaths": duo.deaths,
+            "Kill Death Ratio": duo.kd,
+            
+            "Kills Per Match": duo.killsPerMatch,
+            // killsPerMin: duo.killsPerMin,
+            "Matches Played": duo.matches,
+            "Minutes Played": duo.minutesPlayed,
+            "Players Outlived": duo.playersOutlived,
+            "Score": duo.score,
+            "Score Per Match": duo.scorePerMatch,
+            "Top 5": duo.top5,
+            "Top 12": duo.top12,
+            "Win Rate": duo.winRate,
+            
             })
         })
 
@@ -121,24 +117,46 @@ function FortniteTile() {
         setSquad((prev) => {
             return ({
             ...prev,
-            deaths: squad.deaths,
-            kd: squad.kd,
-            kills: squad.kills,
-            killsPerMatch: squad.killsPerMatch,
-            killsPerMin: squad.killsPerMin,
-            matches: squad.matches,
-            minutesPlayed: squad.minutesPlayed,
-            playersOutlived: squad.playersOutlived,
-            score: squad.score,
-            scorePerMatch: squad.scorePerMatch,
-            top3: squad.top3,
-            top6: squad.top6,
-            winRate: squad.winRate,
-            wins: squad.wins,
+            "Wins": squad.wins,
+            "Kills": squad.kills,
+            "Deaths": squad.deaths,
+            "Kill Death Ratio": squad.kd,
+            "Matches Played": squad.matches,
+            "Kills Per Match": squad.killsPerMatch,
+            // "Kills Per Minute": squad.killsPerMin,
+            
+            "Minutes Played": squad.minutesPlayed,
+            "Players Outlived": squad.playersOutlived,
+            "Score": squad.score,
+            // scorePerMatch: squad.scorePerMatch,
+            "Top 3": squad.top3,
+            "Top 6": squad.top6,
+            "Win Rate": squad.winRate,
+            
             })
         })
 
         });
+    }
+
+    function handleChange(event) {
+
+      const {value, name} = event.target;
+  
+      setParams(prev => {
+        if (name === "gameType"){
+          return {
+              ...prev,
+              gameType: value
+          }
+        } else {
+            return {
+                ...prev,
+                gamertag: value,
+            }
+        }
+      })
+      event.preventDefault();
     }
 
 
@@ -159,6 +177,55 @@ function FortniteTile() {
     
       const [showContent, setShowContent] = useState({showContent: false})
     
+      function gameType() {
+        if(params.gameType == "Overall"){
+           return(
+             <div>
+            {Object.keys(overall).map((keyName, i) => (
+              <div className="Stats">
+              <h2 className="StatTile Row">{Object.keys(overall)[i]}</h2>  
+              <p className="Stat Row">{overall[keyName]}</p>
+              </div>
+              ))}
+              </div>
+           )
+        } else if(params.gameType == "Solo"){
+          return(
+            <div>
+           {Object.keys(solo).map((keyName, i) => (
+             <div className="Stats">
+             <h2 className="StatTile Row">{Object.keys(solo)[i]}</h2>  
+             <p className="Stat Row">{solo[keyName]}</p>
+             </div>
+             ))}
+             </div>
+          )
+        } else if(params.gameType == "Duos"){
+          return(
+            <div>
+           {Object.keys(duo).map((keyName, i) => (
+             <div className="Stats">
+             <h2 className="StatTile Row">{Object.keys(duo)[i]}</h2>  
+             <p className="Stat Row">{duo[keyName]}</p>
+             </div>
+             ))}
+             </div>
+          )
+        } else if(params.gameType == "Squads"){
+          return(
+            <div>
+           {Object.keys(squad).map((keyName, i) => (
+             <div className="Stats">
+             <h2 className="StatTile Row">{Object.keys(squad)[i]}</h2>  
+             <p className="Stat Row">{squad[keyName]}</p>
+             </div>
+             ))}
+             </div>
+          )
+        }
+      }
+
+
       function displayContent() {
         if(showContent.showContent == false){
           return(
@@ -167,6 +234,18 @@ function FortniteTile() {
           callAPI();
           showResults("Show");
         }}>Search for Results</button>
+        
+  <form>
+    <input value={params.gamertag} name="gamerTag" onChange={handleChange}></input>
+    <select value={params.gameType} name="gameType" onChange={handleChange}>
+        
+         <option value="Overall">Overall</option>
+         <option value="Solo">Solo</option>
+         <option value="Duos">Duos</option>
+         <option value="Squads">Squads</option>
+  
+    </select>
+</form>
           </div>
           )
         }else{
@@ -174,12 +253,7 @@ function FortniteTile() {
           <div>
            
             <h1>Fortnite</h1>
-            {Object.keys(overall).map((keyName, i) => (
-                <div className="Stats">
-                <h2 className="StatTile Row">{objectNames[i]}</h2>  
-                <p className="Stat Row">{overall[keyName]}</p>
-                </div>
-                ))}
+              {gameType()}
                 <button name="Show" onClick={() => {
           callAPI();
           showResults("Hide");
@@ -193,31 +267,6 @@ function FortniteTile() {
     return (
         <div className="GameTile">
             {displayContent()}
-        {/* <div className="GameTile left">
-            <h1>Fortnite</h1>
-            {Object.keys(overall).map((keyName, i) => (
-                <div className="Stats">
-                <h2 className="StatTile Row">{objectNames[i]}</h2>  
-                <p className="Stat Row">{overall[keyName]}</p>
-                </div>
-                ))}
-                
-        </div>
-
-        <div className="GameTile right">
-            <h1>Fortnite</h1>
-            {Object.keys(solo).map((keyName, i) => (
-                <div className="Stats">
-                <h2 className="StatTile Row">{objectNames[i]}</h2>  
-                <p className="Stat Row">{solo[keyName]}</p>
-                </div>
-                ))}
-                
-        </div> */}
-
-        
-
-        {/* <button onClick={callAPI}>Click Here</button> */}
 
         </div>
         

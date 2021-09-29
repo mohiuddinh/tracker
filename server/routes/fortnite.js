@@ -4,7 +4,7 @@ const router = express.Router();
 const { auth } = require("../middleware/auth");
 var axios = require("axios");
 const { response } = require("express");
-const FortniteAPI = require("fortnite-api-com");
+// const FortniteAPI = require("fortnite-api-com");
 
 // const fconfig = {
 //     apikey: "72ebd6aaa1bbf3509b980f77f6a447c76a593081",
@@ -29,13 +29,18 @@ const FortniteAPI = require("fortnite-api-com");
 //   })
 
 // });
-router.get("/test", auth, (req, res) => {
-    console.log("yeee f");
+router.post("/test", auth, (req, res) => {
+
+  console.log(req.body);
+    let thisURL = 
+    "https://fortnite-api.com/v2/stats/br/v2/?name=" +
+    req.body.gamertag;
+  ;
     var fortniteOptions = {
       method: "GET",
-      url: "https://fortnite-api.com/v2/stats/br/v2/?name=Kombatkid13",
+      url: thisURL,
       headers: {
-        
+        "x-api-key": "72ebd6aaa1bbf3509b980f77f6a447c76a593081",
         "x-rapidapi-host": "fortnite-api-com",
       },
     };
@@ -48,7 +53,7 @@ router.get("/test", auth, (req, res) => {
       })
       .catch(function (error) {
         console.error(error);
-        return res.json({ status: "error", data: response.data });
+        return res.json({ status: "error", data: response.data.data });
       });
   });
 

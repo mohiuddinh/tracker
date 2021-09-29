@@ -9,35 +9,21 @@ function HaloTile() {
     const [haloGeneral, setHaloGeneral] = useState({});
     const [haloMatch, setHaloMatch] = useState({});
 
-    const haloGeneralNames = {
-        1: "Gamertag",
-        // 2: "Clan Tag",
-        // 3: "Total Play Time",
-        2: "Total Games Played",
-        3: "Wins",
-        4: "Losses",
-        5: "Win Ratio",
-        6: "Kills",
-        7: "Deaths",
-        8: "Kills Per Game",
-        9: "Kill Death Ratio",
-        10: "Deaths Per Game",
-        // 13: "Current Streak",
-    }
-
-    const haloMatchNames = {
-        1: "Game Variant",
-        2: "Win(true) / Loss(false)",
-        3: "Score",
-        4: "Kills",
-        5: "Deaths",
-        6: "Assists",
-        7: "Headshots",
-        // 8: "Medals",
-        8: "Kill Death Ratio",
-        // 10: "Last Played",
-
-    }
+    // const haloGeneralNames = {
+    //     0: "Gamertag",
+    //     // 2: "Clan Tag",
+    //     // 3: "Total Play Time",
+    //     2: "Total Games Played",
+    //     2: "Wins",
+    //     3: "Losses",
+    //     4: "Win Ratio",
+    //     5: "Kills",
+    //     6: "Deaths",
+    //     7: "Kills Per Game",
+    //     8: "Kill Death Ratio",
+    //     9: "Deaths Per Game",
+    //     // 13: "Current Streak",
+    // }
 
         const [params, setParams] = useState({
             gamertag: "",
@@ -57,18 +43,18 @@ function HaloTile() {
             setHaloGeneral((prev) => {
                 return ({
                 ...prev,
-                gamertag: account.gamertag,
+                "GamerTag": account.gamertag,
                 //clanTag: account.clanTag,
                 //playTime: account.playTime,
-                gamesPlayed: account.gamesPlayed,
-                wins: account.wins,
-                losses: account.losses,
-                winRatio: account.winRatio,
-                kills: account.kills,
-                deaths: account.deaths,
-                killsPerGame: account.killsPerGame,
-                killDeathRatio: account.killDeathRatio,
-                deathsPerGame: account.deathsPerGame,
+                "Total Games Played": account.gamesPlayed,
+                "Total Wins": account.wins,
+                "Total Losses": account.losses,
+                "Win Ratio": Math.round((account.winRatio) * 10) / 10,
+                "Total Kills": account.kills,
+                "Total Deaths": account.deaths,
+                "Average Kills Per Game": Math.round((account.killsPerGame) * 10) / 10,
+                "Kill Death Ratio": Math.round((account.killDeathRatio) * 10) /10,
+                "Average Deaths Per Game": Math.round((account.deathsPerGame) * 10) / 10,
                 //currentStreak: account.currentStreak,
                 })
             })
@@ -76,24 +62,24 @@ function HaloTile() {
             var matchWon;
             function won() {
                 if(match.won){
-                    return (matchWon = "Yes")
+                    return (matchWon = "Victory")
                 }else{
-                    return  (matchWon = "No")
+                    return  (matchWon = "Loss")
                 }
             }
 
             setHaloMatch((prev) => {
                 return({
                 ...prev,
-                matchGameVariant: match.gameVariant,
-                matchWon: won(),
-                matchScore: match.score,
-                matchKills: match.kills,
-                matchDeaths: match.deaths,
-                matchAssists: match.assists,
-                matchHeadshots: match.headshots,
+                "Game Variant": match.gameVariant,
+                "Win/Loss": won(),
+                "Score": match.score,
+                "Kills": match.kills,
+                "Deaths": match.deaths,
+                "Assists": match.assists,
+                "Headshots": match.headshots,
                 // matchMedals: match.matchMedals,
-                matchKillDeathRatio: match.killDeathRatio,
+                "Match Kill Death Ratio": Math.round((match.killDeathRatio) * 10) / 10,
                 // matchPlayedAtRecency: match.matchPlayedAtRecency,
                 })
             })
@@ -176,7 +162,7 @@ function HaloTile() {
             {
                 value: "Assault"
             },
-        ]
+        ];
 
           function handleChange(event) {
 
@@ -254,14 +240,14 @@ function HaloTile() {
                 <h1>General Stats</h1>
                 {Object.keys(haloGeneral).map((keyName, i) => (
                 <div className="Stats">
-                <h2 className="StatTile Row">{haloGeneralNames[i]}</h2>  
+                <h2 className="StatTile Row">{Object.keys(haloGeneral)[i]}</h2>  
                 <p className="Stat Row">{haloGeneral[keyName]}</p>
                 </div>
                 ))}
                 <h1>Match Specific Stats</h1>
                 {Object.keys(haloMatch).map((keyName, i) => (
                 <div className="Stats">
-                <h2 className="StatTile Row">{haloMatchNames[i]}</h2>  
+                <h2 className="StatTile Row">{Object.keys(haloMatch)[i]}</h2>  
                 <p className="Stat Row">{haloMatch[keyName]}</p>
                 </div>
                 ))}

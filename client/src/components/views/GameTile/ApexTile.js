@@ -7,16 +7,16 @@ function ApexTile() {
   const [apex, setApex] = useState({});
 
   var objectNames = {
-      1: "Username",
-      2: "Level",
-      3: "BattlePass Level",
-      4: "BR Rank",
-      5: "BR Rank Score",
-      6: "BR Rank Div",
-      7: "Recent Played Legend",
-      8: "Arena Rank",
-      9: "Arena Rank Div",
-      10: "Current Legend Icon",
+      0: "Username",
+      1: "Level",
+      2: "BattlePass Level",
+      3: "BR Rank",
+      4: "BR Rank Score",
+      5: "BR Rank Div",
+      6: "Recent Played Legend",
+      7: "Arena Rank",
+      8: "Arena Rank Div",
+      9: "Current Legend Icon",
       
   }
 

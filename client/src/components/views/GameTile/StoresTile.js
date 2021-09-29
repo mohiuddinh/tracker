@@ -31,9 +31,9 @@ function StoresTile() {
           function loopStores(){
             for(var i = 0; i < data.length; i++){
               var game = data[i];
-              var gameID = "Game" + [i];
-              var priceID = "Price" + [i];
-              var pictureID = "Picture" +[i]
+              var gameID = "Result #" + [i];
+              var priceID = "Price #" + [i];
+              var pictureID = "Picture #" + [i];
               setStoreStats(prev => {
                 return {
                   ...prev,
@@ -88,6 +88,7 @@ function StoresTile() {
             if(showContent.showContent == false){
               return(
               <div>
+                <h1>Search for Steam Prices!</h1>
                 <button name="Show" onClick={() => {
           callAPI();
           showResults("Show");
@@ -101,8 +102,13 @@ function StoresTile() {
             }else{
               return(
               <div>
-                 <h1>{params.gameName}</h1>
-                 
+                 <h1>Steam Results for: {params.gameID}</h1>
+                 {Object.keys(storeStats).map((keyName, i) => (
+                <div className="Stats">
+                <h2 className="StatTile Row">{Object.keys(storeStats)[i]}</h2>  
+                <p className="Stat Row">{storeStats[keyName]}</p>
+                </div>
+                ))}
                 <button name="Hide" onClick={() => {
                   
                   showResults("Hide");
