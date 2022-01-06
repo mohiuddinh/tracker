@@ -1,0 +1,55 @@
+div .players {
+    margin-left: auto;
+    margin-right: auto;
+    /* width: 70%; */
+}
+
+div .stats {
+    display: grid;
+    display: -ms-grid;
+    -ms-grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    
+
+    grid-gap: 20px;
+}
+
+.statItem {
+    margin: 30px;
+    
+}
+
+.name {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.playerInfo {
+    display: flex;
+}
+
+div .green {
+    border: 5px solid green;
+}
+
+div .gold {
+    border: 5px solid goldenrod;
+}
+
+#gold {
+    color: goldenrod;
+}
+
+#green {
+    color: green
+}
+
+.rank {
+    height: 50px;
+    width: 50px;
+}
+
+.playerTile {
+    margin: 0px;
+    background: rgba(255,255,255,0);
+}

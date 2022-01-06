@@ -6,7 +6,7 @@ const https = require("https");
 const request = require("request");
 const dotenv = require("dotenv");
 const axios = require("axios").default;
-const battlegrounds = require('battlegrounds')
+
 
 
 const bodyParser = require("body-parser");
@@ -105,6 +105,21 @@ const connect = mongoose.connect(config.mongoURI,
 // console.log(result);
 // })();
 
+// Using Node.js 14.x +
+// use "lib" package from npm
+// const lib = require('lib')({token: 'tok_dev_QENCWQAKCeCVf2P2wgKDHgw9GU81tGBTtpuwkR5gNR7HwP6KHvnP2G6CkYyncCBH'});
+
+// // make API request
+// var haloInfinite = (async () => {
+
+//   let result = await lib.halo.infinite['@0.2.1'].articles({
+//     language: 'en-US'
+//   });
+//   console.log(result);
+// })
+// haloInfinite();
+
+
 
 // https://github.com/salikx/TheDivisionTab-API SOURCE
 // axios.request("https://thedivisiontab.com/api/search.php?name=baiier&platform=uplay").then(res => {
@@ -173,14 +188,12 @@ const connect = mongoose.connect(config.mongoURI,
 
 
 
-
-
   
 
 //END API'S 
 // REMEMBER TO CREDIT SOURCES
 
-
+console.log(process.env.REACT_APP_APEX_API_KEY)
 //to not get any deprecation warning or error
 //support parsing of application/x-www-form-urlencoded post data
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -193,6 +206,7 @@ app.use('/api/users', require('./routes/users'));
 app.use('/api/apex', require('./routes/apex')); 
 app.use('/api/fortnite', require('./routes/fortnite'));
 app.use('/api/halomcc', require('./routes/halomcc'));
+app.use('/api/haloinfinite', require('./routes/haloinfinite'));
 app.use('/api/csgo', require('./routes/csgo'));
 app.use('/api/stores', require('./routes/stores'));
 

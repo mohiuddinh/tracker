@@ -1,0 +1,28 @@
+div .container{
+    margin-right: auto;
+    width: 35%;
+    
+}
+
+div .article {
+    padding: 10px;
+    margin: 10px;
+    background-color: #242a30;
+    border: 5px solid silver;
+}
+
+h1, h2, p {
+    color: wheat;
+}
+
+.articlePics {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 95%;
+    border: 3px solid silver;
+}
+
+.articleButton {
+    margin-left: 10px;
+}

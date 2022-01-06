@@ -12,12 +12,14 @@ router.post("/test", auth, (req, res) => {
     "/" +
     req.body.console;
 
+    var apexToken = process.env.REACT_APP_APEX_API_KEY;
+
   var apexOptions = {
     method: "GET",
     url: thisURL,
     headers: {
       "x-rapidapi-key": "f4a936d572msh54c9a38579e5eedp1223c7jsnf3bf55cba7f7",
-      "x-rapidapi-host": "apex-legends.p.rapidapi.com",
+      "apexToken": "5c5a685f-65cb-48cc-aeed-bb496c30",
     },
   };
 

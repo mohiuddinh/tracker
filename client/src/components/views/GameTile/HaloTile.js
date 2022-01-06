@@ -1,6 +1,7 @@
 import { urlencoded } from "body-parser";
 import React, { useState } from "react";
 import './GameTile.css';
+import loading from '../assets/b6e0b072897469.5bf6e79950d23.gif'
 const axios = require("axios").default;
 
 
@@ -29,6 +30,10 @@ function HaloTile() {
             gamertag: "",
             game: "All",
             gameVariant: "Slayer"
+        })
+
+        const {inProgress, setInProgress} = useState({
+          inProgress: true,
         })
 
     function callAPI() {
@@ -212,6 +217,7 @@ function HaloTile() {
             if(showContent.showContent == false){
               return(
               <div>
+                <img src={loading} class="LOADING" alt='loading...'></img>
                 <button name="Show" onClick={() => {
           callAPI();
           showResults("Show");

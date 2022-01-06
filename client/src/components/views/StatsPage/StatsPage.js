@@ -6,15 +6,17 @@ import FortniteTile from "../GameTile/FortniteTile";
 import HaloTile from "../GameTile/HaloTile";
 import CSGOTile from "../GameTile/CSGOTile";
 import StoresTile from "../GameTile/StoresTile";
+import HaloInfiniteTile from "../GameTile/HaloInfiniteTile";
+import HaloInfinitePlayersTile from "../GameTile/HaloInfinitePlayers";
 
 
-function LandingPage() {
+function StatsPage() {
    
 
   return (
     <>
-      <div className="">{/*App*/}
-        <FaCode style={{ fontSize: "4rem" }} />
+      <div style= {{ display: "flex" }}className="">{/*App*/}
+        {/* <FaCode style={{ fontSize: "4rem" }} /> */}
         <br />
         {/* <span style={{ fontSize: "2rem" }}>Let's Start Coding!</span> */}
         {/* <ApexTile/>
@@ -22,6 +24,8 @@ function LandingPage() {
         <HaloTile/>
         <CSGOTile/>
         <StoresTile/> */}
+        <HaloInfiniteTile/>
+        <HaloInfinitePlayersTile/>
 
 
       </div>
@@ -32,4 +36,4 @@ function LandingPage() {
   );
 }
 
-export default LandingPage;
+export default StatsPage;
